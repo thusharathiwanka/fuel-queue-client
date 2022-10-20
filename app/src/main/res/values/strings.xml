@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">CodeLearner</string>
-    <string name="you_re_not_member">You\'re not member ?</string>
+    <string name="app_name">Queue</string>
+    <string name="you_re_not_member">Not registered yet?</string>
     <string name="register">Register</string>
-    <string name="codeLearner">CodeLearner</string>
-    <string name="learn_from">Learn from</string>
-    <string name="anywhere">Anywhere</string>
+    <string name="codeLearner">Queue</string>
+    <string name="learn_from">Efficient Fuel</string>
+    <string name="anywhere">Supply Assistant</string>
     <string name="explore">Explore</string>
     <string name="welcome">Welcome</string>
     <string name="login">Login</string>
-    <string name="you_re_an_admin">You\'re an Admin ?</string>
+    <string name="you_re_an_admin">You\'re an Admin?</string>
     <string name="admin_login">Admin login</string>
     <string name="hello_there">Hello there</string>
     <string name="password">Password</string>
