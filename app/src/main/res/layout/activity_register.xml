@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/nextRegisterBtn"
+        android:id="@+id/RegisterBtn"
         android:layout_width="120dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
@@ -128,14 +128,14 @@
         android:autofillHints="" />
 
     <Switch
-        android:id="@+id/switch2"
+        android:id="@+id/ownerSwitchReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/semibold"
         android:text="@string/station_owner"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/nextRegisterBtn"
+        app:layout_constraintBottom_toTopOf="@+id/RegisterBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
