@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.fuel_queue_client.util.InputValidator;
+import com.example.fuel_queue_client.utils.InputValidator;
 
 import java.util.Objects;
 

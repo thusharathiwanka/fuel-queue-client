@@ -13,13 +13,20 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.fuel_queue_client.util.InputValidator;
+import com.example.fuel_queue_client.api.APIConfig;
+import com.example.fuel_queue_client.api.auth.AuthApi;
+import com.example.fuel_queue_client.api.auth.IAuthApi;
+import com.example.fuel_queue_client.models.user.UserRequest;
+import com.example.fuel_queue_client.models.user.UserResponse;
+import com.example.fuel_queue_client.utils.InputValidator;
 
 import org.json.JSONObject;
 
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
     ImageView backBtn;
@@ -27,13 +34,11 @@ public class RegisterActivity extends AppCompatActivity {
     EditText usernameInput, emailInput, passwordInput, vehicleTypeInput;
     Switch stationOwnerSwitch;
 
-    InputValidator inputValidator;
-
     String username;
     String password;
     String email;
     String role;
-    String vehicleType;
+    String vehicleType = null;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -59,23 +64,33 @@ public class RegisterActivity extends AppCompatActivity {
             if (email.length() <= 0 || username.length() <= 0 || password.length() <= 0 || vehicleType.length() <= 0) {
                 Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
             } else {
-                boolean isValidEmail  = inputValidator.emailValidate(email);
+                boolean isValidEmail = InputValidator.emailValidate(email);
 
                 if (isValidEmail) {
-                    boolean isValidUsername = inputValidator.usernameValidate(username);
+                    boolean isValidUsername = InputValidator.usernameValidate(username);
 
-                    if(isValidUsername) {
-                        if (true) {
-                            Toast.makeText(getApplicationContext(), "This email is already registered", Toast.LENGTH_SHORT).show();
-                        } else if (false) {
-                            Toast.makeText(getApplicationContext(), "This username is already taken", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    IAuthApi authApi = APIConfig.getConfig().create(IAuthApi.class);
+                    Call<UserResponse>  call = authApi.registerUser(new UserRequest(email, username, password, role, vehicleType));
+
+                    call.enqueue(new Callback<UserResponse>() {
+                        @Override
+                        public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                            if (!response.isSuccessful()) {
+                               Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                               return;
+                            }
+
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
+                            Toast.makeText(getApplicationContext(), "Successfully registered", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Enter a valid username. Username should contain characters and numbers", Toast.LENGTH_SHORT).show();
-                    }
+
+                        @Override
+                        public void onFailure(Call<UserResponse> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 } else {
                     Toast.makeText(getApplicationContext(), "Enter a valid email", Toast.LENGTH_SHORT).show();
                 }
