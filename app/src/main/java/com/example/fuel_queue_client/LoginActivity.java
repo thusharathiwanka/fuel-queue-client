@@ -40,31 +40,28 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.passwordInput);
         stationOwnerSwitch = findViewById(R.id.ownerSwitch);
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                username = usernameInput.getText().toString();
-                password = passwordInput.getText().toString();
+        loginBtn.setOnClickListener(view -> {
+            username = usernameInput.getText().toString();
+            password = passwordInput.getText().toString();
 
-                System.out.println(username + password + role);
+            System.out.println(username + password + role);
 
-                if (username.length() <= 0 || password.length() <= 0) {
-                    Toast.makeText(LoginActivity.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-                } else {
-                    boolean isValidUsername = usernameValidate(username);
+            if (username.length() <= 0 || password.length() <= 0) {
+                Toast.makeText(LoginActivity.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            } else {
+                boolean isValidUsername = usernameValidate(username);
 
-                    if (isValidUsername) {
-                        if (true) {
-                            Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
-                            intent.putExtra("USERNAME", username);
-                            startActivity(intent);
-                            Toast.makeText(LoginActivity.this, "Welcome back " + username, Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Your username or password is invalid", Toast.LENGTH_SHORT).show();
-                        }
+                if (isValidUsername) {
+                    if (true) {
+                        Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                        intent.putExtra("USERNAME", username);
+                        startActivity(intent);
+                        Toast.makeText(LoginActivity.this, "Welcome back " + username, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(LoginActivity.this, "Enter a valid username", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Your username or password is invalid", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(LoginActivity.this, "Enter a valid username", Toast.LENGTH_SHORT).show();
                 }
             }
         });
