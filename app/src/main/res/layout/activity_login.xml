@@ -58,7 +58,7 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/ownerSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/semibold"
