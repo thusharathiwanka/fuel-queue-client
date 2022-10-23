@@ -40,9 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.passwordInput);
         stationOwnerSwitch = findViewById(R.id.ownerSwitch);
 
-
-//        final DBHelperProfile loginDB = new DBHelperProfile(this);
-
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
