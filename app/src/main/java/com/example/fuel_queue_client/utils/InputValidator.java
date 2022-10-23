@@ -1,10 +1,11 @@
-package com.example.fuel_queue_client.util;
+package com.example.fuel_queue_client.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputValidator {
-    public boolean emailValidate(String email) {
+    public static boolean emailValidate(String email) {
+        System.out.println(email);
         String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
         Pattern emailPattern = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
         Matcher emailMatcher = emailPattern.matcher(email);
@@ -12,7 +13,8 @@ public class InputValidator {
         return emailMatcher.find();
     }
 
-    public boolean usernameValidate(String username) {
+    public static boolean usernameValidate(String username) {
+        System.out.println(username);
         String usernameRegex = "^[aA-zZ0-9_-]\\w{5,30}$";
         Pattern usernamePattern = Pattern.compile(usernameRegex);
         Matcher usernameMatcher = usernamePattern.matcher(username);
