@@ -78,6 +78,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     role = "station-owner";
+                } else {
+                    role = "customer";
                 }
             }
         });

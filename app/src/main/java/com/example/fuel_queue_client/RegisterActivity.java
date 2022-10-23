@@ -50,8 +50,6 @@ public class RegisterActivity extends AppCompatActivity {
             password = passwordInput.getText().toString();
             vehicleType = vehicleTypeInput.getText().toString();
 
-            System.out.println(email + username + password + role + vehicleType);
-
             if(email.length() <= 0 || username.length() <= 0 || password.length() <= 0) {
                 Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
             }else {
@@ -85,6 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
                     role = "station-owner";
                 } else {
                     vehicleTypeInput.setVisibility(View.VISIBLE);
+                    role = "customer";
                 }
             }
         });
