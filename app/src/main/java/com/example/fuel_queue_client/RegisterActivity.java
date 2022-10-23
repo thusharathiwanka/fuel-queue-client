@@ -20,13 +20,14 @@ import java.util.regex.Pattern;
 public class RegisterActivity extends AppCompatActivity {
     ImageView backBtn;
     Button regBtn;
-    EditText usernameInput, emailInput, passwordInput;
+    EditText usernameInput, emailInput, passwordInput, vehicleTypeInput;
     Switch stationOwnerSwitch;
 
     String username;
     String password;
     String email;
     String role;
+    String vehicleType;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -39,41 +40,38 @@ public class RegisterActivity extends AppCompatActivity {
         emailInput = findViewById(R.id.emailInput);
         usernameInput = findViewById(R.id.usernameInput);
         passwordInput = findViewById(R.id.passwordInput);
+        vehicleTypeInput = findViewById(R.id.vehicleTypeInput);
         stationOwnerSwitch = findViewById(R.id.ownerSwitchReg);
         regBtn = findViewById(R.id.RegisterBtn);
 
-        regBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                email = emailInput.getText().toString();
-                username = usernameInput.getText().toString();
-                password = passwordInput.getText().toString();
+        regBtn.setOnClickListener(view -> {
+            email = emailInput.getText().toString();
+            username = usernameInput.getText().toString();
+            password = passwordInput.getText().toString();
+            vehicleType = vehicleTypeInput.getText().toString();
 
-                System.out.println(email + username + password + role);
+            if(email.length() <= 0 || username.length() <= 0 || password.length() <= 0) {
+                Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            }else {
+                boolean isValidEmail  = emailValidate(email);
 
-                if(email.length() <= 0 || username.length() <= 0 || password.length() <= 0) {
-                    Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
-                }else {
-                    boolean isValidEmail  = emailValidate(email);
+                if(isValidEmail) {
+                    boolean isValidUsername = usernameValidate(username);
 
-                    if(isValidEmail) {
-                        boolean isValidUsername = usernameValidate(username);
-
-                        if(isValidUsername) {
-                            if(true) {
-                                Toast.makeText(getApplicationContext(), "This email is already registered", Toast.LENGTH_SHORT).show();
-                            } else if(false) {
-                                Toast.makeText(getApplicationContext(), "This username is already taken", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                startActivity(intent);
-                            }
+                    if(isValidUsername) {
+                        if(true) {
+                            Toast.makeText(getApplicationContext(), "This email is already registered", Toast.LENGTH_SHORT).show();
+                        } else if(false) {
+                            Toast.makeText(getApplicationContext(), "This username is already taken", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Enter a valid username. Username should contain characters and numbers", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(intent);
                         }
                     } else {
-                        Toast.makeText(getApplicationContext(), "Enter a valid email", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Enter a valid username. Username should contain characters and numbers", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Enter a valid email", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -81,7 +79,11 @@ public class RegisterActivity extends AppCompatActivity {
         stationOwnerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
+                    vehicleTypeInput.setVisibility(View.INVISIBLE);
                     role = "station-owner";
+                } else {
+                    vehicleTypeInput.setVisibility(View.VISIBLE);
+                    role = "customer";
                 }
             }
         });
