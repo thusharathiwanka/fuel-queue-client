@@ -13,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.fuel_queue_client.util.InputValidator;
+
+import org.json.JSONObject;
+
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,6 +26,8 @@ public class RegisterActivity extends AppCompatActivity {
     Button regBtn;
     EditText usernameInput, emailInput, passwordInput, vehicleTypeInput;
     Switch stationOwnerSwitch;
+
+    InputValidator inputValidator;
 
     String username;
     String password;
@@ -50,18 +56,18 @@ public class RegisterActivity extends AppCompatActivity {
             password = passwordInput.getText().toString();
             vehicleType = vehicleTypeInput.getText().toString();
 
-            if(email.length() <= 0 || username.length() <= 0 || password.length() <= 0) {
+            if (email.length() <= 0 || username.length() <= 0 || password.length() <= 0 || vehicleType.length() <= 0) {
                 Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
-            }else {
-                boolean isValidEmail  = emailValidate(email);
+            } else {
+                boolean isValidEmail  = inputValidator.emailValidate(email);
 
-                if(isValidEmail) {
-                    boolean isValidUsername = usernameValidate(username);
+                if (isValidEmail) {
+                    boolean isValidUsername = inputValidator.usernameValidate(username);
 
                     if(isValidUsername) {
-                        if(true) {
+                        if (true) {
                             Toast.makeText(getApplicationContext(), "This email is already registered", Toast.LENGTH_SHORT).show();
-                        } else if(false) {
+                        } else if (false) {
                             Toast.makeText(getApplicationContext(), "This username is already taken", Toast.LENGTH_SHORT).show();
                         } else {
                             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -78,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         stationOwnerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     vehicleTypeInput.setVisibility(View.INVISIBLE);
                     role = "station-owner";
                 } else {
@@ -96,19 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public static boolean emailValidate(String email) {
-        String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
-        Pattern emailPattern = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
-        Matcher emailMatcher = emailPattern.matcher(email);
-
-        return emailMatcher.find();
-    }
-
-    public static boolean usernameValidate(String username) {
-        String usernameRegex = "^[aA-zZ0-9_-]\\w{5,30}$";
-        Pattern usernamePattern = Pattern.compile(usernameRegex);
-        Matcher usernameMatcher = usernamePattern.matcher(username);
-
-        return usernameMatcher.matches();
+    public JSONObject handleSubmit () {
+        return null;
     }
 }
