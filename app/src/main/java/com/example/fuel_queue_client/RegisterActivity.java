@@ -37,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     String username;
     String password;
     String email;
-    String role;
+    String role = "customer";
     String vehicleType = null;
 
     @SuppressLint("MissingInflatedId")
