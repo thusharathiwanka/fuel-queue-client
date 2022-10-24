@@ -17,13 +17,10 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.fuel_queue_client.api.APIConfig;
-import com.example.fuel_queue_client.api.auth.AuthApi;
 import com.example.fuel_queue_client.api.auth.IAuthApi;
 import com.example.fuel_queue_client.models.user.UserRequest;
 import com.example.fuel_queue_client.models.user.UserResponse;
 import com.example.fuel_queue_client.utils.InputValidator;
-
-import org.json.JSONObject;
 
 import java.util.Objects;
 
