@@ -28,7 +28,7 @@
         android:layout_width="328dp"
         android:layout_height="46dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="32dp"
         android:autofillHints=""
         android:ems="10"
@@ -44,7 +44,7 @@
         android:id="@+id/stationNameInput"
         android:layout_width="327dp"
         android:layout_height="49dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="42dp"
         android:autofillHints=""
         android:ems="10"
         android:fontFamily="@font/medium"
@@ -58,7 +58,7 @@
         android:id="@+id/locationInput"
         android:layout_width="328dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="42dp"
         android:autofillHints=""
         android:ems="10"
         android:fontFamily="@font/medium"
@@ -72,7 +72,7 @@
         android:id="@+id/noOfPumps"
         android:layout_width="328dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="42dp"
         android:autofillHints=""
         android:ems="10"
         android:fontFamily="@font/medium"
@@ -82,42 +82,12 @@
         app:layout_constraintStart_toStartOf="@+id/locationInput"
         app:layout_constraintTop_toBottomOf="@+id/locationInput" />
 
-    <EditText
-        android:id="@+id/ArrivalTimeInput"
-        android:layout_width="328dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:fontFamily="@font/medium"
-        android:hint="Fuel Arrival Time"
-        android:inputType="datetime"
-        app:layout_constraintEnd_toEndOf="@+id/noOfPumps"
-        app:layout_constraintStart_toStartOf="@+id/noOfPumps"
-        app:layout_constraintTop_toBottomOf="@+id/noOfPumps" />
-
-    <Switch
-        android:id="@+id/availability_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/semibold"
-        android:text="Availability"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.089"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ArrivalTimeInput"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
     <Button
         android:id="@+id/stationRegisterBtn"
         android:layout_width="120dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="140dp"
         android:background="@drawable/gradientbutton"
         android:fontFamily="@font/medium"
         android:text="@string/register"
@@ -128,7 +98,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/availability_switch" />
+        app:layout_constraintTop_toBottomOf="@+id/noOfPumps" />
 
 
     <ImageView
