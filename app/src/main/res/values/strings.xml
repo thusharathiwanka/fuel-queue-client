@@ -145,4 +145,12 @@
     <string name="my_todos">My Todos</string>
     <string name="contact_us">Contact Us</string>
     <string name="station_owner">Station Owner</string>
+    <string-array name="vehicle_types">
+        <item>Car</item>
+        <item>Van</item>
+        <item>Bus</item>
+        <item>Motorcycle</item>
+        <item>Three Wheel</item>
+        <item>Lorry</item>
+    </string-array>
 </resources>
