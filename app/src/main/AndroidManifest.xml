@@ -21,6 +21,20 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".RegisterStationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".OwnerProfileActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CustomLayoutActivity"
             android:exported="false">
             <meta-data
