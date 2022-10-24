@@ -6,10 +6,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -28,11 +31,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     ImageView backBtn;
     Button regBtn;
-    EditText usernameInput, emailInput, passwordInput, vehicleTypeInput;
+    EditText usernameInput, emailInput, passwordInput;
     Switch stationOwnerSwitch;
+    Spinner vehicleTypeSpinner;
 
     String username;
     String password;
@@ -51,15 +55,19 @@ public class RegisterActivity extends AppCompatActivity {
         emailInput = findViewById(R.id.emailInput);
         usernameInput = findViewById(R.id.usernameInput);
         passwordInput = findViewById(R.id.passwordInput);
-        vehicleTypeInput = findViewById(R.id.vehicleTypeInput);
         stationOwnerSwitch = findViewById(R.id.ownerSwitchReg);
+        vehicleTypeSpinner = findViewById(R.id.spinnerVehicle);
         regBtn = findViewById(R.id.RegisterBtn);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.vehicle_types, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        vehicleTypeSpinner.setAdapter(adapter);
+        vehicleTypeSpinner.setOnItemSelectedListener(this);
 
         regBtn.setOnClickListener(view -> {
             email = emailInput.getText().toString();
             username = usernameInput.getText().toString();
             password = passwordInput.getText().toString();
-            vehicleType = vehicleTypeInput.getText().toString();
 
             if (email.length() <= 0 || username.length() <= 0 || password.length() <= 0 || vehicleType.length() <= 0) {
                 Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
@@ -100,10 +108,10 @@ public class RegisterActivity extends AppCompatActivity {
         stationOwnerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    vehicleTypeInput.setVisibility(View.INVISIBLE);
+                    vehicleTypeSpinner.setVisibility(View.INVISIBLE);
                     role = "station-owner";
                 } else {
-                    vehicleTypeInput.setVisibility(View.VISIBLE);
+                    vehicleTypeSpinner.setVisibility(View.VISIBLE);
                     role = "customer";
                 }
             }
@@ -117,7 +125,13 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public JSONObject handleSubmit () {
-        return null;
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+         vehicleType = adapterView.getItemAtPosition(i).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

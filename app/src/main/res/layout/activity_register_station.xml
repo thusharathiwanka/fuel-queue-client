@@ -4,100 +4,141 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity"
-    android:background="@drawable/register">
+    android:background="@drawable/register"
+    tools:context=".RegisterActivity">
 
     <TextView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:layout_marginBottom="30dp"
         android:fontFamily="@font/heading"
-        android:text="@string/codeLearner"
+        android:text="Register Station"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/welcome"
+        app:layout_constraintBottom_toTopOf="@+id/Registration_numberInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/emailInput"
+        android:id="@+id/Registration_numberInput"
         android:layout_width="328dp"
         android:layout_height="46dp"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="32dp"
         android:autofillHints=""
         android:ems="10"
         android:fontFamily="@font/medium"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/passwordInput"
+        android:hint="Registration Number"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/nameInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.707" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/usernameInput"
+        android:id="@+id/nameInput"
         android:layout_width="327dp"
         android:layout_height="49dp"
         android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
         android:autofillHints=""
         android:ems="10"
         android:fontFamily="@font/medium"
-        android:hint="@string/username"
+        android:hint="Name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/passwordInput"
+        app:layout_constraintBottom_toTopOf="@+id/locationInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.009"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailInput"
-        app:layout_constraintVertical_bias="0.475" />
+        app:layout_constraintTop_toBottomOf="@+id/Registration_numberInput" />
 
     <EditText
-        android:id="@+id/passwordInput"
+        android:id="@+id/locationInput"
         android:layout_width="328dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
         android:autofillHints=""
         android:ems="10"
         android:fontFamily="@font/medium"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:hint="Location"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/ArrivalTimeInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.486" />
+        app:layout_constraintTop_toBottomOf="@+id/nameInput" />
+
+    <EditText
+        android:id="@+id/ArrivalTimeInput"
+        android:layout_width="328dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:fontFamily="@font/medium"
+        android:hint="Fuel Arrival Time"
+        android:inputType="datetime"
+        app:layout_constraintBottom_toTopOf="@+id/FinishTimeInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationInput" />
+
+    <EditText
+        android:id="@+id/FinishTimeInput"
+        android:layout_width="328dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:fontFamily="@font/medium"
+        android:hint="Fuel Finish Time"
+        android:inputType="datetime"
+        app:layout_constraintBottom_toTopOf="@+id/ownerSwitchReg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ArrivalTimeInput" />
 
     <Switch
         android:id="@+id/ownerSwitchReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/semibold"
-        android:text="@string/station_owner"
+        android:text="Availability"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/RegisterBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordInput"
-        app:layout_constraintVertical_bias="0.821"
+        app:layout_constraintTop_toBottomOf="@+id/FinishTimeInput"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Button
         android:id="@+id/RegisterBtn"
         android:layout_width="120dp"
-        android:layout_height="58dp"
+        android:layout_height="45dp"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="132dp"
-        android:backgroundTint="@color/lightBlue"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/gradientbutton"
         android:fontFamily="@font/medium"
         android:text="@string/register"
         android:textAllCaps="false"
@@ -106,49 +147,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="@font/heading"
-        android:text="@string/hello_there"
-        android:textColor="@color/black"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/emailInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.98" />
+        app:layout_constraintTop_toBottomOf="@+id/ownerSwitchReg" />
+
 
     <ImageView
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
         android:contentDescription="@string/back"
-        app:layout_constraintBottom_toTopOf="@+id/welcome"
-        app:layout_constraintEnd_toStartOf="@+id/logo"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/back" />
 
-    <Spinner
-        android:id="@+id/spinnerVehicle"
-        android:layout_width="327dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/passwordInput"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/passwordInput"
-        app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
