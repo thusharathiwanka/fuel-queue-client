@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                             if (!response.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Your username or password is invalid", Toast.LENGTH_SHORT).show();
                                 return;
                             }
 
@@ -82,8 +82,9 @@ public class LoginActivity extends AppCompatActivity {
                                     userResponse.getUsername(),
                                     userResponse.getRole());
 
-                            if (result) {
+                            if (!result) {
                                 Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                return;
                             }
 
                             Intent intent;
