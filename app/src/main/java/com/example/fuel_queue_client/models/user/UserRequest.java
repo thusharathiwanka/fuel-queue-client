@@ -1,17 +1,27 @@
 package com.example.fuel_queue_client.models.user;
 
 public class UserRequest {
-    public UserRequest(String username, String password, String role, String vehicleType, String type) {
+    private String email;
+    private String username;
+    private String password;
+    private String role;
+    private String vehicleType;
+
+    public UserRequest(String email, String username, String password, String role, String vehicleType) {
+        this.email = email;
         this.username = username;
         this.password = password;
         this.role = role;
         this.vehicleType = vehicleType;
     }
 
-    private String username;
-    private String password;
-    private String role;
-    private String vehicleType;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getUsername() {
         return username;
