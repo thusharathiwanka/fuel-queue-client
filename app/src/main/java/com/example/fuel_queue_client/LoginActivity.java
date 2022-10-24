@@ -13,15 +13,17 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.fuel_queue_client.utils.InputValidator;
+
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
     ImageView backBtn;
     Switch stationOwnerSwitch;
     Button loginBtn;
     EditText usernameInput, passwordInput;
+
+    InputValidator inputValidator;
 
     String username;
     String password;
@@ -49,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
             if (username.length() <= 0 || password.length() <= 0) {
                 Toast.makeText(LoginActivity.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
             } else {
-                boolean isValidUsername = usernameValidate(username);
+                boolean isValidUsername = inputValidator.usernameValidate(username);
 
                 if (isValidUsername) {
                     if (true) {
@@ -83,21 +85,5 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    public static boolean emailValidate (String email){
-        String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
-        Pattern emailPattern = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
-        Matcher emailMatcher = emailPattern.matcher(email);
-
-        return emailMatcher.find();
-    }
-
-    public static boolean usernameValidate (String username){
-        String usernameRegex = "^[aA-zZ0-9_-]\\w{5,30}$";
-        Pattern usernamePattern = Pattern.compile(usernameRegex);
-        Matcher usernameMatcher = usernamePattern.matcher(username);
-
-        return usernameMatcher.matches();
     }
 }
