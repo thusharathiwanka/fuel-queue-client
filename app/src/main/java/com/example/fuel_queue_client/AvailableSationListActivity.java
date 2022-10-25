@@ -73,7 +73,7 @@ public class AvailableSationListActivity extends AppCompatActivity {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(AvailableSationListActivity.this, StationDetailsActivity.class);
+                        Intent intent = new Intent(AvailableSationListActivity.this, QueueDetails.class);
                         intent.putExtra("STATION_ID",stations.get(position).getId());
                         startActivity(intent);
 //                        Toast.makeText(FuelStationListActivity.this, "Thanks For Download App= "+list_title[position], Toast.LENGTH_SHORT).show();
