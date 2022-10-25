@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), FuelStationListActivity.class);
+                Intent intent = new Intent(getApplicationContext(), OwnerProfileActivity.class);
                 startActivity(intent);
             }
         });
