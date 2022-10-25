@@ -93,9 +93,9 @@ public class StationDetailsActivity extends AppCompatActivity {
 
         Update.setOnClickListener(view -> {
             System.out.println(Availability.getText().toString());
-            FuelStationRequest  fuelStationRequest = new FuelStationRequest(RegNumber.getText().toString(),Station_name.getText().toString(),Location.getText().toString(),NoPumps.getText().toString(),Availability.getText().toString(),arrivalTime.getText().toString(),finishTime.getText().toString());
+            FuelStationResponse  fuelStationResponse = new FuelStationResponse(id,RegNumber.getText().toString(),Station_name.getText().toString(),Location.getText().toString(),NoPumps.getText().toString(),Availability.getText().toString(),arrivalTime.getText().toString(),finishTime.getText().toString());
 
-            Call<FuelStationResponse> call_Update = fuelStationApi.UpdateStationByID(id,fuelStationRequest);
+            Call<FuelStationResponse> call_Update = fuelStationApi.UpdateStationByID(id,fuelStationResponse);
             call_Update.enqueue(new Callback<FuelStationResponse>() {
                 @Override
                 public void onResponse(Call<FuelStationResponse> call, Response<FuelStationResponse> response) {

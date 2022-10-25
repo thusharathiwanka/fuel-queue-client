@@ -25,6 +25,6 @@ public interface IFuelStationApi {
     Call<FuelStationResponse> GetStationByID(@Path("id") String stationID);
 
     @PUT("/api/FuelStation/{id}")
-    Call<FuelStationResponse> UpdateStationByID(@Path("id") String stationID ,@Body FuelStationRequest request);
+    Call<FuelStationResponse> UpdateStationByID(@Path("id") String stationID ,@Body FuelStationResponse response);
 
 }
