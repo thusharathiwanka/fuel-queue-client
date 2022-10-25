@@ -19,7 +19,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/back"
+                app:layout_constraintBottom_toTopOf="@+id/welcome"
+                app:layout_constraintEnd_toStartOf="@+id/logo"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.027"
+                app:srcCompat="@drawable/back" />
             <TextView
                 android:id="@+id/queueDetailsTitle"
                 android:layout_width="171dp"
@@ -181,7 +195,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/welcome"
+                    android:id="@+id/departureTitile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -252,7 +266,7 @@
 
 
             <Button
-                android:id="@+id/myeditbutton2"
+                android:id="@+id/joinQueue"
                 android:layout_width="206dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
