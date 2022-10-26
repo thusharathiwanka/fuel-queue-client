@@ -49,7 +49,7 @@ public class AvailableStationListActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<FuelStationResponse>>() {
             @Override
             public void onResponse(Call<List<FuelStationResponse>> call, Response<List<FuelStationResponse>> response) {
-
+                //display a error message if response unsuccessful
                 if (!response.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     return;
