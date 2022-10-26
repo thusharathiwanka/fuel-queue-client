@@ -49,40 +49,52 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.passwordInput);
         stationOwnerSwitch = findViewById(R.id.ownerSwitch);
 
-        //
+        //validate user and if not valid, displays a error message
         loginBtn.setOnClickListener(view -> {
+            //extract values from form fields
             username = usernameInput.getText().toString();
             password = passwordInput.getText().toString();
 
+            // checks whether all fields are filled
             if (username.length() <= 0 || password.length() <= 0) {
                 Toast.makeText(LoginActivity.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
             } else {
+                // validate the username
                 boolean isValidUsername = InputValidator.usernameValidate(username);
 
+                // make request to login the user
                 IAuthApi authApi = APIConfig.getConfig().create(IAuthApi.class);
                 Call<UserResponse> call = authApi.loginUser(new UserRequest("", username, password, role, ""));
 
                 if(isValidUsername) {
+
+                    /***
+                     Asynchronously send the request and notify callback of its response or if an error occurred talking to the server, creating the request, or processing the response
+                     ***/
                     call.enqueue(new Callback<UserResponse>() {
                         @Override
                         public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                            //display a error message if response unsuccessful
                             if (!response.isSuccessful()) {
                                 Toast.makeText(getApplicationContext(), "Your username or password is invalid", Toast.LENGTH_SHORT).show();
                                 return;
                             }
 
                             DBHelper dbHelper = new DBHelper(LoginActivity.this);
+                            //get the response of successful request
                             UserResponse userResponse = response.body();
 
+                            //displays a error message if response is null
                             if (userResponse == null) {
                                 Toast.makeText(LoginActivity.this, "Your username or password is invalid", Toast.LENGTH_SHORT).show();
                                 return;
                             }
-
+                            //save user inside the local database
                             boolean result = dbHelper.saveUser(userResponse.getId(),
                                     userResponse.getUsername(),
                                     userResponse.getRole());
 
+                            //displays error message if user saving is not successful
                             if (!result) {
                                 Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 return;
@@ -90,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Intent intent;
 
+                            //direct to the relevant user profile according to the user type
                             if (Objects.equals(role, "customer")) {
                                 intent = new Intent(LoginActivity.this, CustomerProfileActivity.class);
                             } else {
@@ -97,21 +110,25 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                             startActivity(intent);
+                            //displays  success message on successful response
                             Toast.makeText(getApplicationContext(), "Welcome back", Toast.LENGTH_SHORT).show();
                             finish();
                         }
 
+                        //displays toast message,if response of the request is a failure
                         @Override
                         public void onFailure(Call<UserResponse> call, Throwable t) {
                             Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
+                    // displays error message if  username is not valid
                     Toast.makeText(LoginActivity.this, "Enter a valid username", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
+        //direct to the home page
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,6 +137,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //allocate user type using switch.if checked, user type is equals to station-owner. else user type is customer.
         stationOwnerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
