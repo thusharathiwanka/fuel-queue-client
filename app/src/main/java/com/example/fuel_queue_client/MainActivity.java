@@ -3,8 +3,12 @@ package com.example.fuel_queue_client;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         explore = findViewById(R.id.exploreBtn);
         register = findViewById(R.id.register);
 
+        //directs to the login page
         explore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,10 +36,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //directs to the register page
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), FuelStationListActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intent);
             }
         });

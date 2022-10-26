@@ -26,6 +26,7 @@ public class OwnerProfileActivity extends AppCompatActivity {
         View = findViewById(R.id.View_stations_Owner);
         LogOut =findViewById(R.id.LogOUT_Owner);
 
+        //directs to the fuel station registering interface
         Create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(android.view.View view) {
@@ -35,6 +36,7 @@ public class OwnerProfileActivity extends AppCompatActivity {
             }
         });
 
+        //directs to the fuel station list interface
         View.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(android.view.View view) {
@@ -44,6 +46,7 @@ public class OwnerProfileActivity extends AppCompatActivity {
             }
         });
 
+        //deletes the locally saved user and directs to the main activity
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(android.view.View view) {
@@ -51,7 +54,7 @@ public class OwnerProfileActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(OwnerProfileActivity.this, MainActivity.class);
                 User user = dbHelper.getSingleUser();
-                dbHelper.deleteOne(user.getUserId());
+                dbHelper.deleteOne(user.getId());
                 startActivity(intent);
                 finish();
             }
