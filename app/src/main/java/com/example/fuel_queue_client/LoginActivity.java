@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.passwordInput);
         stationOwnerSwitch = findViewById(R.id.ownerSwitch);
 
+        //
         loginBtn.setOnClickListener(view -> {
             username = usernameInput.getText().toString();
             password = passwordInput.getText().toString();

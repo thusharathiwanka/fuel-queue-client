@@ -31,7 +31,7 @@ public class AvailableStationListActivity extends AppCompatActivity {
     Integer[] imageID ={};
 
 
-// retrieve all created stations from database filtered by user ID.
+// retrieve all available stations from database.
     IFuelStationApi fuelStationApi = APIConfig.getConfig().create(IFuelStationApi.class);
     Call<List<FuelStationResponse>> call = fuelStationApi.GetAllStations();
 
@@ -43,6 +43,9 @@ public class AvailableStationListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_available_sation_list);
 
 
+        /***
+         Asynchronously send the request and notify callback of its response or if an error occurred talking to the server, creating the request, or processing the response
+         ***/
         call.enqueue(new Callback<List<FuelStationResponse>>() {
             @Override
             public void onResponse(Call<List<FuelStationResponse>> call, Response<List<FuelStationResponse>> response) {
@@ -51,7 +54,7 @@ public class AvailableStationListActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //get the response of the request
+                //get the response of success request
                 List<FuelStationResponse> stations = response.body();
 
                 //iterate through the response list and identify available stations
@@ -78,7 +81,7 @@ public class AvailableStationListActivity extends AppCompatActivity {
                 ListViewAdapter adapter = new ListViewAdapter(AvailableStationListActivity.this,list_title ,list_subtitle,imageID);
                 listView.setAdapter(adapter);
 
-                //after click on one list item,moves to the queue details page of the station
+                //after click on one list item,moves to the queue details page of each the station
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -94,7 +97,7 @@ public class AvailableStationListActivity extends AppCompatActivity {
 
             }
 
-            //displays toast message,if response of the request is a failure,
+            //displays toast message,if response of the request is a failure
             @Override
             public void onFailure(Call<List<FuelStationResponse>> call, Throwable t) {
 
