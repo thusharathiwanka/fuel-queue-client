@@ -16,7 +16,7 @@ public class ListViewAdapter extends ArrayAdapter<String> {
     private final String[]  subtitle;
     private final Integer[] imageID;
 
-
+    //initialization of  of adapter class
     public ListViewAdapter(Activity context, String[] title, String[] subtitle, Integer[] imageID) {
         super(context,R.layout.activity_custom_layout,title);
         this.context = context;
@@ -25,7 +25,13 @@ public class ListViewAdapter extends ArrayAdapter<String> {
         this.imageID = imageID;
     }
 
-
+    /***
+     * return the list item view according to the passed values
+     * @param  position - position of the item
+     * @param view  -
+     * @param parent -
+     * @return - list item view
+     * **/
     public View getView(int position, View view, ViewGroup parent){
 
         LayoutInflater inflater = context.getLayoutInflater();
@@ -36,7 +42,6 @@ public class ListViewAdapter extends ArrayAdapter<String> {
 
         titleTxt.setText(title[position]);
         subTitleTxt.setText(subtitle[position]);
-//        imageView.setImageResource(imageID[position]);
 
         return rootView;
     }

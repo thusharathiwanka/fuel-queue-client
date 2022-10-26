@@ -24,14 +24,10 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_main);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.WHITE);
-        }
         explore = findViewById(R.id.exploreBtn);
         register = findViewById(R.id.register);
 
+        //directs to the login page
         explore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //directs to the register page
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
