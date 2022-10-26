@@ -11,11 +11,9 @@ import android.widget.Toast;
 
 import com.example.fuel_queue_client.api.APIConfig;
 import com.example.fuel_queue_client.api.fuel_station.IFuelStationApi;
-import com.example.fuel_queue_client.models.fuel_station.FuelStationRequest;
 import com.example.fuel_queue_client.models.fuel_station.FuelStationResponse;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FuelStationListActivity extends AppCompatActivity {
+public class AvailableSationListActivity extends AppCompatActivity {
 
     IFuelStationApi fuelStationApi = APIConfig.getConfig().create(IFuelStationApi.class);
     Call<List<FuelStationResponse>> call = fuelStationApi.GetAllStations();
@@ -36,13 +34,11 @@ public class FuelStationListActivity extends AppCompatActivity {
 //    {R.drawable.github,R.drawable.gmail,R.drawable.play,R.drawable.kik,R.drawable.meetme,
 //            R.drawable.yahoo,R.drawable.google};
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Objects.requireNonNull(getSupportActionBar()).hide();
-        setContentView(R.layout.activity_fuel_station_list);
-
+        setContentView(R.layout.activity_available_sation_list);
 
 
         call.enqueue(new Callback<List<FuelStationResponse>>() {
@@ -53,29 +49,31 @@ public class FuelStationListActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                 List<FuelStationResponse> stations = response.body();
+                List<FuelStationResponse> stations = response.body();
 
                 for (FuelStationResponse fuelStationResponse : stations) {
+                    if(fuelStationResponse.getAvailability() != ""){
                     title.add(fuelStationResponse.getName());
-                     subTitle.add(fuelStationResponse.getLocation());
-                     System.out.println("title" +title);
+                    subTitle.add(fuelStationResponse.getLocation());
+                    System.out.println("title" +title);
                     System.out.println("title" +subTitle);
+                    }
                 }
 
-                 list_title= title.toArray(new String[0]);
-                 list_subtitle = subTitle.toArray(new String[0]);;
+                list_title= title.toArray(new String[0]);
+                list_subtitle = subTitle.toArray(new String[0]);;
                 System.out.println("title 02" +list_title);
                 System.out.println("list_subtitle 02" +list_subtitle);
 
                 listView = findViewById(R.id.listView_id);
-                ListViewAdapter adapter = new ListViewAdapter(FuelStationListActivity.this,list_title ,list_subtitle,imageID);
+                ListViewAdapter adapter = new ListViewAdapter(AvailableSationListActivity.this,list_title ,list_subtitle,imageID);
                 listView.setAdapter(adapter);
 
 
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(FuelStationListActivity.this, StationDetailsActivity.class);
+                        Intent intent = new Intent(AvailableSationListActivity.this, QueueDetails.class);
                         intent.putExtra("STATION_ID",stations.get(position).getId());
                         startActivity(intent);
 //                        Toast.makeText(FuelStationListActivity.this, "Thanks For Download App= "+list_title[position], Toast.LENGTH_SHORT).show();
@@ -93,8 +91,6 @@ public class FuelStationListActivity extends AppCompatActivity {
 
             }
         });
-
-
 
     }
 }

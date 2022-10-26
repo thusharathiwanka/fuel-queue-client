@@ -1,0 +1,30 @@
+Index: .idea/deploymentTargetDropDown.xml
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+deleted file mode 100644
+--- a/.idea/deploymentTargetDropDown.xml	(revision fbf857d6e5d252e6cb5334a568332c8889b7baab)
++++ /dev/null	(revision fbf857d6e5d252e6cb5334a568332c8889b7baab)
+@@ -1,22 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="deploymentTargetDropDown">
+-    <runningDeviceTargetSelectedWithDropDown>
+-      <Target>
+-        <type value="RUNNING_DEVICE_TARGET" />
+-        <deviceKey>
+-          <Key>
+-            <type value="VIRTUAL_DEVICE_PATH" />
+-
+-            <value value="$USER_HOME$/.android/avd/Pixel_3a_API_33_x86_64.avd" />
+-
+-            <value value="C:\Users\DELL\.android\avd\Nexus_4_API_28.avd" />
+-            <value value="C:\Users\ASUS\.android\avd\Pixel_3a_API_30.avd" />
+-
+-          </Key>
+-        </deviceKey>
+-      </Target>
+-    </runningDeviceTargetSelectedWithDropDown>
+-    <timeTargetWasSelectedWithDropDown value="2022-10-24T06:14:00.976156Z" />
+-  </component>
+-</project>
+\ No newline at end of file
