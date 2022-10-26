@@ -21,18 +21,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AvailableSationListActivity extends AppCompatActivity {
+public class AvailableStationListActivity extends AppCompatActivity {
 
-    IFuelStationApi fuelStationApi = APIConfig.getConfig().create(IFuelStationApi.class);
-    Call<List<FuelStationResponse>> call = fuelStationApi.GetAllStations();
     ListView listView;
     List<String> title = new ArrayList<String>();
     List<String> subTitle = new ArrayList<String>();
     String[] list_title;
     String[] list_subtitle;
     Integer[] imageID ={};
-//    {R.drawable.github,R.drawable.gmail,R.drawable.play,R.drawable.kik,R.drawable.meetme,
-//            R.drawable.yahoo,R.drawable.google};
+
+
+// retrieve all created stations from database filtered by user ID.
+    IFuelStationApi fuelStationApi = APIConfig.getConfig().create(IFuelStationApi.class);
+    Call<List<FuelStationResponse>> call = fuelStationApi.GetAllStations();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,34 +51,42 @@ public class AvailableSationListActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                //get the response of the request
                 List<FuelStationResponse> stations = response.body();
 
+                //iterate through the response list and identify available stations
                 for (FuelStationResponse fuelStationResponse : stations) {
-                    if(fuelStationResponse.getAvailability() != ""){
+
+                    if(fuelStationResponse.getAvailability() != "Available"){
+
+                    //name of the station as title of the list item
                     title.add(fuelStationResponse.getName());
+
+                    //name of the station as subTitle of the list item
                     subTitle.add(fuelStationResponse.getLocation());
-                    System.out.println("title" +title);
-                    System.out.println("title" +subTitle);
+
                     }
                 }
 
+                //conversion of arraylist to string array
                 list_title= title.toArray(new String[0]);
                 list_subtitle = subTitle.toArray(new String[0]);;
-                System.out.println("title 02" +list_title);
-                System.out.println("list_subtitle 02" +list_subtitle);
+
 
                 listView = findViewById(R.id.listView_id);
-                ListViewAdapter adapter = new ListViewAdapter(AvailableSationListActivity.this,list_title ,list_subtitle,imageID);
+                //set the list view to the adapter
+                ListViewAdapter adapter = new ListViewAdapter(AvailableStationListActivity.this,list_title ,list_subtitle,imageID);
                 listView.setAdapter(adapter);
 
-
+                //after click on one list item,moves to the queue details page of the station
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(AvailableSationListActivity.this, QueueDetails.class);
+
+                        //pass the station Id as a intent to the Queue details activity
+                        Intent intent = new Intent(AvailableStationListActivity.this, QueueDetails.class);
                         intent.putExtra("STATION_ID",stations.get(position).getId());
                         startActivity(intent);
-//                        Toast.makeText(FuelStationListActivity.this, "Thanks For Download App= "+list_title[position], Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -84,6 +94,7 @@ public class AvailableSationListActivity extends AppCompatActivity {
 
             }
 
+            //displays toast message,if response of the request is a failure,
             @Override
             public void onFailure(Call<List<FuelStationResponse>> call, Throwable t) {
 

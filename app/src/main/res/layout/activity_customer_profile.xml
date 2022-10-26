@@ -6,4 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".CustomerProfileActivity">
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/lightBlue"
+        android:text="Customer Profile"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/View_station_customer"
+        app:layout_constraintEnd_toEndOf="@+id/View_station_customer"
+        app:layout_constraintStart_toStartOf="@+id/View_station_customer"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/View_station_customer"
+        android:layout_width="226dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="44dp"
+        android:backgroundTint="@color/lightBlue"
+        android:text="View Available Stations"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/button2" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="226dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="124dp"
+        android:backgroundTint="@color/lightBlue"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/LogOut_Customer"
+        app:layout_constraintEnd_toEndOf="@+id/LogOut_Customer"
+        app:layout_constraintStart_toStartOf="@+id/LogOut_Customer" />
+
+    <Button
+        android:id="@+id/LogOut_Customer"
+        android:layout_width="226dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="100dp"
+        android:backgroundTint="@color/darkBlue"
+        android:text="Log Out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
