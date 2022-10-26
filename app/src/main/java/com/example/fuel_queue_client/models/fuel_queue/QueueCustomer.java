@@ -1,5 +1,8 @@
 package com.example.fuel_queue_client.models.fuel_queue;
 
+/*
+ * QueueCustomer: class - Represents customer in the queue
+ * */
 public class QueueCustomer {
 
     private String userId;
