@@ -2,7 +2,7 @@ package com.example.fuel_queue_client.models.fuel_station;
 
 public class FuelStationResponse {
 
-    private  String id ;
+    private String id ;
     private String registrationNumber;
     private String name;
     private String location;

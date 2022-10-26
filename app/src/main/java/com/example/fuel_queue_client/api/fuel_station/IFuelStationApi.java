@@ -10,6 +10,8 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface IFuelStationApi {
 
@@ -18,5 +20,11 @@ public interface IFuelStationApi {
 
     @GET("/api/FuelStation")
     Call<List<FuelStationResponse>> GetAllStations();
+
+    @GET("/api/FuelStation/{id}")
+    Call<FuelStationResponse> GetStationByID(@Path("id") String stationID);
+
+    @PUT("/api/FuelStation/{id}")
+    Call<FuelStationResponse> UpdateStationByID(@Path("id") String stationID ,@Body FuelStationResponse response);
 
 }
