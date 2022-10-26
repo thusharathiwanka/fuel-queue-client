@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StationDetailsActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Reg_num"
+        android:layout_width="236dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="68dp"
+        android:text="Registration Number"
+        android:textAlignment="textStart"
+        app:layout_constraintEnd_toEndOf="@+id/Station_name"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/Station_name"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/Station_name"
+        android:layout_width="239dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="40dp"
+        android:text="Station Name"
+        app:layout_constraintEnd_toEndOf="@+id/Station_Location"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/Station_Location"
+        app:layout_constraintTop_toBottomOf="@+id/Reg_num" />
+
+    <TextView
+        android:id="@+id/Station_Location"
+        android:layout_width="240dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="40dp"
+        android:text="Location"
+        app:layout_constraintEnd_toEndOf="@+id/Num_pumps"
+        app:layout_constraintHorizontal_bias="0.875"
+        app:layout_constraintStart_toStartOf="@+id/Num_pumps"
+        app:layout_constraintTop_toBottomOf="@+id/Station_name" />
+
+    <TextView
+        android:id="@+id/Num_pumps"
+        android:layout_width="235dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="36dp"
+        android:text="No of Pumps"
+        app:layout_constraintBottom_toTopOf="@+id/ArrivalTime"
+        app:layout_constraintEnd_toEndOf="@+id/ArrivalTime"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/ArrivalTime"
+        app:layout_constraintTop_toBottomOf="@+id/Station_Location"
+        app:layout_constraintVertical_bias="0.114" />
+
+    <EditText
+        android:id="@+id/ArrivalTime"
+        android:layout_width="235dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="36dp"
+        android:ems="10"
+        android:hint="Arrival Time"
+        android:inputType="time"
+        app:layout_constraintBottom_toTopOf="@+id/finishTime"
+        app:layout_constraintEnd_toEndOf="@+id/finishTime"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/finishTime" />
+
+    <EditText
+        android:id="@+id/finishTime"
+        android:layout_width="235dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:hint="Finish Time"
+        android:inputType="time"
+        app:layout_constraintBottom_toTopOf="@+id/switch_avl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/switch_avl" />
+
+    <Switch
+        android:id="@+id/switch_avl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="52dp"
+        android:text="Availability"
+        app:layout_constraintBottom_toTopOf="@+id/update_station"
+        app:layout_constraintEnd_toEndOf="@+id/update_station"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/update_station" />
+
+    <Button
+        android:id="@+id/update_station"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="257dp"
+        android:layout_marginBottom="60dp"
+        android:text="Update"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
