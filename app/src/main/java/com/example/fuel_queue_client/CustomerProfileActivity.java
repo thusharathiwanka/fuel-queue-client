@@ -41,7 +41,7 @@ public class CustomerProfileActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(CustomerProfileActivity.this, MainActivity.class);
                 User user = dbHelper.getSingleUser();
-
+                dbHelper.deleteOne(user.getId());
                 startActivity(intent);
 
             }
