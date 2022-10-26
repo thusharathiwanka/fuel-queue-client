@@ -43,11 +43,6 @@ public class StationDetailsActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_station_details);
 
-//        name =getIntent().getStringExtra("STATION_NAME");
-//        location =getIntent().getStringExtra("STATION_LOCATION");
-//        noPumps = getIntent().getStringExtra("STATION_NO_OF_PUMPS");
-//        registrationNumber =getIntent().getStringExtra("STATION_REGISTRATION_NUM");
-
         id =getIntent().getStringExtra("STATION_ID");
         System.out.println("StationID" + id);
         RegNumber = findViewById(R.id.Reg_num);
@@ -60,30 +55,40 @@ public class StationDetailsActivity extends AppCompatActivity {
         Update = findViewById(R.id.update_station);
 
 
-
+        //create fuel station api object
         IFuelStationApi fuelStationApi = APIConfig.getConfig().create(IFuelStationApi.class);
+        //retrieves station by id
         Call<FuelStationResponse> call = fuelStationApi.GetStationByID(id);
 
+        /***
+         Asynchronously send the request and notify callback of its response or if an error occurred talking to the server, creating the request, or processing the response
+         ***/
         call.enqueue(new Callback<FuelStationResponse>() {
             @Override
             public void onResponse(Call<FuelStationResponse> call, Response<FuelStationResponse> response) {
+
+                //displays a error message, if the response is not successful
                 if (!response.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                //save response if the response is successful
                 FuelStationResponse fuelStationResponse = response.body();
+                //assign values to text field using response
                 RegNumber.setText(fuelStationResponse.getRegistrationNumber());
                 Station_name.setText(fuelStationResponse.getName());
                 Location.setText(fuelStationResponse.getLocation());
                 NoPumps.setText(fuelStationResponse.getNoPumps());
             }
 
+            // if request get failed a error message will display
             @Override
             public void onFailure(Call<FuelStationResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
+        // saves value of the switch
         Availability.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     availability = isChecked;
@@ -91,25 +96,33 @@ public class StationDetailsActivity extends AppCompatActivity {
         });
 
 
+        // update the station object with user entered values
         Update.setOnClickListener(view -> {
-            System.out.println(Availability.getText().toString());
+            //saves all user entered values and existing values inside a FuelStationResponse object
             FuelStationResponse  fuelStationResponse = new FuelStationResponse(id,RegNumber.getText().toString(),Station_name.getText().toString(),Location.getText().toString(),NoPumps.getText().toString(),Availability.getText().toString(),arrivalTime.getText().toString(),finishTime.getText().toString());
-
+            //send request to update fuel station details
             Call<FuelStationResponse> call_Update = fuelStationApi.UpdateStationByID(id,fuelStationResponse);
+
+            /***
+             Asynchronously send the request and notify callback of its response or if an error occurred talking to the server, creating the request, or processing the response
+             ***/
             call_Update.enqueue(new Callback<FuelStationResponse>() {
                 @Override
                 public void onResponse(Call<FuelStationResponse> call, Response<FuelStationResponse> response) {
+                    //display a error message if response unsuccessful
                     if (!response.isSuccessful()) {
                         Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
+                    //directs to user created list of fuel station interface
                     Intent intent = new Intent(StationDetailsActivity.this, FuelStationListActivity.class);
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "Successfully Updated Station", Toast.LENGTH_SHORT).show();
                     finish();
                 }
 
+                //displays toast message,if response of the request is a failure
                 @Override
                 public void onFailure(Call<FuelStationResponse> call, Throwable t) {
                     Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
