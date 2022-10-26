@@ -1,5 +1,8 @@
 package com.example.fuel_queue_client.models.user;
 
+/*
+ * UserRequest: class - Represents user request for the API call
+ * */
 public class UserRequest {
     private String email;
     private String username;
