@@ -51,7 +51,7 @@ public class OwnerProfileActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(OwnerProfileActivity.this, MainActivity.class);
                 User user = dbHelper.getSingleUser();
-                dbHelper.deleteOne(user.getUserId());
+                dbHelper.deleteOne(user.getId());
                 startActivity(intent);
                 finish();
             }
