@@ -1,9 +1,13 @@
 package com.example.fuel_queue_client.database;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.fuel_queue_client.models.user.User;
 
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(Context context) {
@@ -37,4 +41,43 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return result != -1;
     }
-}
+
+    public boolean deleteOne(String userId){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        Cursor cursor = db.query("user", null, null, null, null, null, null);
+        if(cursor.moveToFirst()) {
+            @SuppressLint("Range") String rowId = cursor.getString(cursor.getColumnIndex(userId));
+            db.delete("user", "userId" + "=?",  new String[]{rowId});
+        }
+        db.close();
+
+        return true;
+    }
+
+
+    public User getSingleUser(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        Cursor cursor = db.query("user", new String[] { "*" },
+                null,
+                null, null, null, null, null);
+        User user = null;
+        if(cursor != null)
+        {
+            if (cursor.moveToFirst()) {
+                user = new User(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3)
+
+                );
+            }
+            cursor.close();
+        }
+        db.close();
+        return user;
+        }
+    }
