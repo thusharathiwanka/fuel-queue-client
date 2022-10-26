@@ -56,24 +56,32 @@ public class RegisterStationActivity extends AppCompatActivity {
             location = locationInput.getText().toString();
             noPumps = noOfPumps.getText().toString();
 
-
+            //saves all user entered values and existing values inside a FuelStationResponse object
             IFuelStationApi fuelStationApi = APIConfig.getConfig().create(IFuelStationApi.class);
+            //make request to save a fuel station object in database
             Call<FuelStationResponse> call = fuelStationApi.registerStation(new FuelStationRequest( registrationNumber,name,location,noPumps,availability,arrivalTime,finishTime));
 
+
+            /***
+             Asynchronously send the request and notify callback of its response or if an error occurred talking to the server, creating the request, or processing the response
+             ***/
             call.enqueue(new Callback<FuelStationResponse>() {
                 @Override
                 public void onResponse(Call<FuelStationResponse> call, Response<FuelStationResponse> response) {
+                    //display a error message if response unsuccessful
                     if (!response.isSuccessful()) {
                         Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
+                    //directs to fuel station list activity
                     Intent intent = new Intent(RegisterStationActivity.this, FuelStationListActivity.class);
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "Successfully registered", Toast.LENGTH_SHORT).show();
                     finish();
                 }
 
+                //displays toast message,if response of the request is a failure
                 @Override
                 public void onFailure(Call<FuelStationResponse> call, Throwable t) {
                     Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();

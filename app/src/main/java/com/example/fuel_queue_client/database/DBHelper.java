@@ -45,12 +45,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean deleteOne(int userId){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from " + "user" + " where id='" + userId + "'");
-
-
-//        Cursor cursor = db.query("user", null, null, null, null, null, null);
-//        if(cursor.moveToFirst()) {
-//            db.delete("user", "userId" + "=?",  userId);
-//        }
         db.close();
 
         return true;

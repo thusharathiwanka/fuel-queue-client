@@ -1,5 +1,8 @@
 package com.example.fuel_queue_client.models.user;
 
+/*
+ * User: class - Represents user model in local database
+ * */
 public class User {
     private int id;
     private String userId;
