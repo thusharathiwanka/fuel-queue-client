@@ -4,6 +4,9 @@ import com.example.fuel_queue_client.models.user.UserRequest;
 
 import java.util.List;
 
+/*
+ * FuelQueueResponse: class - Represents fuel queue response from the API call
+ * */
 public class FuelQueueResponse {
     private int id ;
     private String fuelStationId;

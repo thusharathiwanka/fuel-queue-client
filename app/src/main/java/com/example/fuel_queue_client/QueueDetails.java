@@ -17,8 +17,11 @@ import com.example.fuel_queue_client.database.DBHelper;
 import com.example.fuel_queue_client.models.fuel_queue.FuelQueueRequest;
 import com.example.fuel_queue_client.models.fuel_queue.FuelQueueResponse;
 import com.example.fuel_queue_client.models.fuel_queue.QueueCustomer;
+import com.example.fuel_queue_client.models.fuel_station.FuelStationResponse;
 import com.example.fuel_queue_client.models.user.User;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,29 +31,36 @@ import retrofit2.Response;
 
 public class QueueDetails extends AppCompatActivity {
     ImageView backBtn;
-    Button joinQueue;
-    TextView branchName,queueAvailability ;
-    EditText totalVehicleAmount,vehicleName,vehicleAmount,departureTime,fuelType,fuelTypeStatus;
-    String Station_Id;
+    Button joinQueue,queueVehicleType;
+    TextView branch_name,queueAvailability ;
+    TextView total_vehicleAmount,vehicle_name,vehicle_amount,departure_time,fuelType,fuelTypeStatus;
+    String Station_Id,Station_Name;
     int Total_vehicals;
+    ArrayList<String> title = new ArrayList<String>();
+    ArrayList<Integer> subTitle = new ArrayList<Integer>();
+
     QueueCustomer queueCustomer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_queue_details);
-
         backBtn = findViewById(R.id.back);
         joinQueue = findViewById(R.id.joinQueue);
-        branchName = findViewById(R.id.branchName);
+        branch_name = findViewById(R.id.branchName);
         queueAvailability = findViewById(R.id.queueAvailability);
-        totalVehicleAmount = findViewById(R.id.totalVehicleAmount);
-        vehicleName = findViewById(R.id.vehicleName);
-        vehicleAmount = findViewById(R.id.vehicleAmount);
-        departureTime = findViewById(R.id.departureTime);
+        total_vehicleAmount = findViewById(R.id.totalVehicleAmount);
+//        vehicle_name = findViewById(R.id.vehicleName);
+//        vehicle_amount = findViewById(R.id.vehicleAmount);
+        departure_time = findViewById(R.id.departureTime);
+        queueVehicleType = findViewById(R.id.queueVehicleType);
 
-        Station_Id =getIntent().getStringExtra("STATION_ID");
 
+        Station_Id = getIntent().getStringExtra("STATION_ID");
+        Station_Name = getIntent().getStringExtra("STATION_NAME");
+
+        branch_name.setText(Station_Name);
+        total_vehicleAmount.setText(Total_vehicals);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,20 +70,18 @@ public class QueueDetails extends AppCompatActivity {
         });
 
 
-        IFuelQueueApi fuelQueueApi = APIConfig.getConfig().create(IFuelQueueApi.class);
-
         joinQueue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                IFuelQueueApi fuelQueueApi = APIConfig.getConfig().create(IFuelQueueApi.class);
                 DBHelper dbHelper = new DBHelper(QueueDetails.this);
                 User user = dbHelper.getSingleUser();
 
-                QueueCustomer queueCustomer =  new QueueCustomer(user.getUserId(),true,"","","","");
+                QueueCustomer queueCustomer = new QueueCustomer(user.getUserId(), true, "", "", "", "");
 
-                FuelQueueRequest fuelQueueRequest = new FuelQueueRequest(Station_Id,0,queueCustomer);
-                System.out.println("" +
-                        "+6"+fuelQueueRequest.getCustomers().getUserId());
-                Call<FuelQueueResponse> call = fuelQueueApi.AddUserFuelQueue(Station_Id,fuelQueueRequest);
+                FuelQueueRequest fuelQueueRequest = new FuelQueueRequest(Station_Id, 0, queueCustomer);
+                System.out.println("" + "+6" + fuelQueueRequest.getCustomers().getUserId());
+                Call<FuelQueueResponse> call = fuelQueueApi.AddUserFuelQueue(Station_Id, fuelQueueRequest);
 
                 call.enqueue(new Callback<FuelQueueResponse>() {
                     @Override
@@ -85,24 +93,40 @@ public class QueueDetails extends AppCompatActivity {
                             return;
                         }
 
-                        FuelQueueResponse fuelQueueResponses= response.body();
-                        totalVehicleAmount.setText(fuelQueueResponses.getNumberOfVehicles());
+                        FuelQueueResponse fuelQueueResponses = response.body();
+                        for (QueueCustomer queueCustomer : fuelQueueResponses.getCustomers()) {
+                            title.add(queueCustomer.getVehicleType());
 
-                        System.out.println(fuelQueueResponses);
+                            System.out.println(fuelQueueResponses);
+                        }
+                        for (String sub : title) {
+                            subTitle.add(Collections.frequency(title, sub));
+                        }
+
+                        Total_vehicals = fuelQueueResponses.getNumberOfVehicles();
+
+
                     }
 
                     @Override
                     public void onFailure(Call<FuelQueueResponse> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
+
+            }
+        });
+        queueVehicleType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), QueueDetailsVehicalTypesListActivity.class);
+                intent.putStringArrayListExtra("Title",title);
+                intent.putIntegerArrayListExtra("subTitle",subTitle);
+                startActivity(intent);
+                finish();
             }
         });
 
 
-
-
-
-    }
-}
+    }}

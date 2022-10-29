@@ -2,7 +2,9 @@ package com.example.fuel_queue_client.models.fuel_queue;
 
 import com.example.fuel_queue_client.QueueDetails;
 import com.example.fuel_queue_client.models.user.UserRequest;
-
+/*
+* FuelQueueRequest: class - Represents fuel queue request for the API call
+* */
 public class FuelQueueRequest {
 
     private String fuelStationId;

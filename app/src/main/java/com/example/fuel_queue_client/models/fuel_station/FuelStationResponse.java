@@ -1,5 +1,8 @@
 package com.example.fuel_queue_client.models.fuel_station;
 
+/*
+ * FuelStationResponse: class - Represents fuel station response from the API call
+ * */
 public class FuelStationResponse {
 
     private String id ;
