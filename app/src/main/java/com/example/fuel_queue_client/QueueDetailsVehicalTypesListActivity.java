@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class QueueDetailsVehicalTypesListActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class QueueDetailsVehicalTypesListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_queue_details_vehical_types_list);
 
 
