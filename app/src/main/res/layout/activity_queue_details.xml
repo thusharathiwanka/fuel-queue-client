@@ -68,7 +68,6 @@
                     android:layout_marginTop="10dp"
                     android:ems="10"
                     android:fontFamily="@font/bold"
-                    android:text="Kandana"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -121,7 +120,7 @@
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/totalVehicleAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -150,7 +149,7 @@
 
                     <TextView
                         android:id="@+id/vehicleTypes"
-                        android:layout_width="wrap_content"
+                        android:layout_width="177dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
                         android:layout_marginBottom="32dp"
@@ -159,33 +158,17 @@
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <EditText
-                            android:id="@+id/vehicleName"
-                            android:layout_width="125dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="36dp"
-                            android:layout_marginBottom="32dp"
-                            android:fontFamily="@font/semibold"
-                            android:text="car"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-
-                        <EditText
-                            android:id="@+id/vehicleAmount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="19dp"
-                            android:fontFamily="@font/semibold"
-                            android:text="5"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-
-                    </LinearLayout>
+                    <Button
+                        android:id="@+id/queueVehicleType"
+                        android:layout_width="149dp"
+                        android:layout_height="71dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginBottom="32dp"
+                        android:backgroundTint="@color/lightBlue"
+                        android:text="View Vehicle type"
+                        tools:layout_editor_absoluteX="354dp"
+                        tools:layout_editor_absoluteY="1dp" />
                 </LinearLayout>
             </LinearLayout>
 

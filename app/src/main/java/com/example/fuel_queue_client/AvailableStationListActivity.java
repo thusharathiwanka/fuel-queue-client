@@ -26,6 +26,7 @@ public class AvailableStationListActivity extends AppCompatActivity {
     ListView listView;
     List<String> title = new ArrayList<String>();
     List<String> subTitle = new ArrayList<String>();
+
     String[] list_title;
     String[] list_subtitle;
     Integer[] imageID ={};
@@ -89,6 +90,7 @@ public class AvailableStationListActivity extends AppCompatActivity {
                         //pass the station Id as a intent to the Queue details activity
                         Intent intent = new Intent(AvailableStationListActivity.this, QueueDetails.class);
                         intent.putExtra("STATION_ID",stations.get(position).getId());
+                        intent.putExtra("STATION_NAME",stations.get(position).getName());
                         startActivity(intent);
 
 
