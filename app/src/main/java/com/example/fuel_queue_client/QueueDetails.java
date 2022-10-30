@@ -31,11 +31,11 @@ import retrofit2.Response;
 
 public class QueueDetails extends AppCompatActivity {
     ImageView backBtn;
-    Button joinQueue,queueVehicleType;
+    Button join_Queue,queueVehicleType;
     TextView branch_name,queueAvailability ;
     TextView total_vehicleAmount,vehicle_name,vehicle_amount,departure_time,fuelType,fuelTypeStatus;
     String Station_Id,Station_Name;
-    int Total_vehicals;
+    int Total_vehicals = 0;
     ArrayList<String> title = new ArrayList<String>();
     ArrayList<Integer> subTitle = new ArrayList<Integer>();
 
@@ -46,7 +46,7 @@ public class QueueDetails extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_queue_details);
         backBtn = findViewById(R.id.back);
-        joinQueue = findViewById(R.id.joinQueue);
+        join_Queue = findViewById(R.id.joinQueue);
         branch_name = findViewById(R.id.branchName);
         queueAvailability = findViewById(R.id.queueAvailability);
         total_vehicleAmount = findViewById(R.id.totalVehicleAmount);
@@ -60,7 +60,7 @@ public class QueueDetails extends AppCompatActivity {
         Station_Name = getIntent().getStringExtra("STATION_NAME");
 
         branch_name.setText(Station_Name);
-        total_vehicleAmount.setText(Total_vehicals);
+        total_vehicleAmount.setText(String.valueOf(Total_vehicals));
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +70,7 @@ public class QueueDetails extends AppCompatActivity {
         });
 
 
-        joinQueue.setOnClickListener(new View.OnClickListener() {
+        join_Queue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 IFuelQueueApi fuelQueueApi = APIConfig.getConfig().create(IFuelQueueApi.class);
