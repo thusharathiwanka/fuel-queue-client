@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class FuelStationListActivity extends AppCompatActivity {
     String[] list_title;
     String[] list_subtitle;
     Integer[] imageID ={};
+    ImageView backBtn;
 
     //retrieve all created fuel stations by user id
     IFuelStationApi fuelStationApi = APIConfig.getConfig().create(IFuelStationApi.class);
@@ -45,6 +47,17 @@ public class FuelStationListActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_fuel_station_list);
 
+
+        backBtn = findViewById(R.id.back2);
+
+        //direct to the home page
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), OwnerProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
         /***
         Asynchronously send the request and notify callback of its response or if an error occurred talking to the server, creating the request, or processing the response
