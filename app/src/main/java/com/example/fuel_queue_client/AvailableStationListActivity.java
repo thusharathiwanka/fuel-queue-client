@@ -93,6 +93,7 @@ public class AvailableStationListActivity extends AppCompatActivity {
                         Intent intent = new Intent(AvailableStationListActivity.this, QueueDetails.class);
                         intent.putExtra("STATION_ID",stations.get(position).getId());
                         intent.putExtra("STATION_NAME",stations.get(position).getName());
+                        intent.putExtra("AvailabilityStation",stations.get(position).getAvailability());
                         startActivity(intent);
 
 

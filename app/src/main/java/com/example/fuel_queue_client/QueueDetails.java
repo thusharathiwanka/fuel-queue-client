@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,12 +16,10 @@ import com.example.fuel_queue_client.database.DBHelper;
 import com.example.fuel_queue_client.models.fuel_queue.FuelQueueRequest;
 import com.example.fuel_queue_client.models.fuel_queue.FuelQueueResponse;
 import com.example.fuel_queue_client.models.fuel_queue.QueueCustomer;
-import com.example.fuel_queue_client.models.fuel_station.FuelStationResponse;
 import com.example.fuel_queue_client.models.user.User;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -31,10 +28,11 @@ import retrofit2.Response;
 
 public class QueueDetails extends AppCompatActivity {
     ImageView backBtn;
-    Button join_Queue,queueVehicleType;
-    TextView branch_name,queueAvailability ;
     TextView total_vehicleAmount,departure_time;
-    String Station_Id,Station_Name;
+    String Station_Id,Station_Name,queue_Availability;
+    Button join_Queue,queue_vehicle_type;
+    TextView branch_name,availability;
+    int Total_vehicles = 0;
     ArrayList<String> title = new ArrayList<String>();
     ArrayList<Integer> subTitle = new ArrayList<Integer>();
 
@@ -47,15 +45,18 @@ public class QueueDetails extends AppCompatActivity {
         backBtn = findViewById(R.id.back);
         join_Queue = findViewById(R.id.joinQueue);
         branch_name = findViewById(R.id.branchName);
-        queueAvailability = findViewById(R.id.queueAvailability);
+        availability = findViewById(R.id.queueAvailability);
         total_vehicleAmount = findViewById(R.id.totalVehicleAmount);
         departure_time = findViewById(R.id.departureTime);
-        queueVehicleType = findViewById(R.id.queueVehicleType);
+        queue_vehicle_type = findViewById(R.id.queueVehicleType);
 
 
         Station_Id = getIntent().getStringExtra("STATION_ID");
         Station_Name = getIntent().getStringExtra("STATION_NAME");
+        queue_Availability = getIntent().getStringExtra("AvailabilityStation");
+
         branch_name.setText(Station_Name);
+        availability.setText(queue_Availability);
 
         IFuelQueueApi fuelQueueApi = APIConfig.getConfig().create(IFuelQueueApi.class);
         DBHelper dbHelper = new DBHelper(QueueDetails.this);
@@ -75,6 +76,8 @@ public class QueueDetails extends AppCompatActivity {
 
             }
         });
+
+
 
 
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +131,7 @@ public class QueueDetails extends AppCompatActivity {
 
             }
         });
-        queueVehicleType.setOnClickListener(new View.OnClickListener() {
+        queue_vehicle_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), QueueDetailsVehicalTypesListActivity.class);
