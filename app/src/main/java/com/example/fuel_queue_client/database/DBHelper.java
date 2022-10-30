@@ -46,7 +46,6 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put("userId", userid);
         cv.put("username", username);
         cv.put("role", role);
-
         long result = db.insert("user",null, cv);
 
         return result != -1;

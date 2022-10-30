@@ -9,12 +9,12 @@ public class FuelQueueRequest {
 
     private String fuelStationId;
     private int numberOfVehicles;
-    private QueueCustomer customers;
+    private QueueCustomer customer;
 
-    public FuelQueueRequest(String fuelStationId, int numberOfVehicles, QueueCustomer customers) {
+    public FuelQueueRequest(String fuelStationId, int numberOfVehicles, QueueCustomer customer) {
         this.fuelStationId = fuelStationId;
         this.numberOfVehicles = numberOfVehicles;
-        this.customers = customers;
+        this.customer = customer;
     }
 
     public String getFuelStationId() {
@@ -34,10 +34,10 @@ public class FuelQueueRequest {
     }
 
     public QueueCustomer getCustomers() {
-        return customers;
+        return customer;
     }
 
-    public void setCustomers(QueueCustomer customers) {
-        this.customers = customers;
+    public void setCustomers(QueueCustomer customer) {
+        this.customer = customer;
     }
 }

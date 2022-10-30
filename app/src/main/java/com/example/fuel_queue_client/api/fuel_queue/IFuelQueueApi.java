@@ -26,7 +26,7 @@ public interface IFuelQueueApi {
      * @return = a boolean value
      */
     @POST("/api/FuelQueue/join/{id}")
-    Call<Boolean> AddUserFuelQueue(@Path("id") String FuelStationID, @Body FuelQueueRequest request);
+    Call<FuelQueueResponse> AddUserFuelQueue(@Path("id") String FuelStationID, @Body FuelQueueRequest request);
 
 
 
