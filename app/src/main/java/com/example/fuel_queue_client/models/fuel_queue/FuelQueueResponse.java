@@ -1,5 +1,9 @@
 package com.example.fuel_queue_client.models.fuel_queue;
 
+import com.example.fuel_queue_client.models.user.UserRequest;
+
+import java.util.List;
+
 /*
  * FuelQueueResponse: class - Represents fuel queue response from the API call
  * */
@@ -7,10 +11,10 @@ public class FuelQueueResponse {
     private int id ;
     private String fuelStationId;
     private int numberOfVehicles;
-    private QueueCustomer customers;
+    private List<QueueCustomer> customers;
 
 
-    public FuelQueueResponse(int id, String fuelStationId, int numberOfVehicles, QueueCustomer customers) {
+    public FuelQueueResponse(int id, String fuelStationId, int numberOfVehicles, List<QueueCustomer> customers) {
         this.id = id;
         this.fuelStationId = fuelStationId;
         this.numberOfVehicles = numberOfVehicles;
@@ -41,11 +45,11 @@ public class FuelQueueResponse {
         this.numberOfVehicles = numberOfVehicles;
     }
 
-    public QueueCustomer getCustomers() {
+    public List<QueueCustomer> getCustomers() {
         return customers;
     }
 
-    public void setCustomers(QueueCustomer customers) {
+    public void setCustomers(List<QueueCustomer> customers) {
         this.customers = customers;
     }
 }

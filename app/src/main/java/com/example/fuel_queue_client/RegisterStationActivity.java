@@ -96,7 +96,7 @@ public class RegisterStationActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RegisterStationActivity.this, MainActivity.class);
+                Intent intent = new Intent(RegisterStationActivity.this, OwnerProfileActivity.class);
                 startActivity(intent);
             }
         });
