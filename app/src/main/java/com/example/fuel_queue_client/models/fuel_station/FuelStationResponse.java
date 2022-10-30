@@ -7,6 +7,7 @@ public class FuelStationResponse {
 
     private String id ;
     private String registrationNumber;
+    private String OwnerId;
     private String name;
     private String location;
     private String noPumps;
@@ -14,9 +15,10 @@ public class FuelStationResponse {
     private String arrivalTime;
     private String finishTime;
 
-    public FuelStationResponse(String id, String registrationNumber, String name, String location, String noPumps, String availability, String arrivalTime, String finishTime) {
+    public FuelStationResponse(String id, String registrationNumber,String OwnerId, String name, String location, String noPumps, String availability, String arrivalTime, String finishTime) {
         this.id = id;
         this.registrationNumber = registrationNumber;
+        this.OwnerId = OwnerId;
         this.name = name;
         this.location = location;
         this.noPumps = noPumps;
@@ -87,5 +89,13 @@ public class FuelStationResponse {
 
     public void setFinishTime(String finishTime) {
         this.finishTime = finishTime;
+    }
+
+    public String getOwnerId() {
+        return OwnerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        OwnerId = ownerId;
     }
 }

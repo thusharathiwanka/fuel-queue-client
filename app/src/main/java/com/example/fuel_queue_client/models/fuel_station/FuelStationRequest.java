@@ -6,6 +6,7 @@ package com.example.fuel_queue_client.models.fuel_station;
 public class FuelStationRequest {
 
     private String registrationNumber;
+    private String OwnerId;
     private String name;
     private String location;
     private String noPumps;
@@ -13,8 +14,9 @@ public class FuelStationRequest {
     private String arrivalTime;
     private String finishTime;
 
-    public FuelStationRequest(String registrationNumber, String name, String location, String noPumps, String availability, String arrivalTime, String finishTime) {
+    public FuelStationRequest(String registrationNumber,String OwnerId, String name, String location, String noPumps, String availability, String arrivalTime, String finishTime) {
         this.registrationNumber = registrationNumber;
+        this.OwnerId = OwnerId;
         this.name = name;
         this.location = location;
         this.noPumps = noPumps;
@@ -77,5 +79,13 @@ public class FuelStationRequest {
 
     public void setFinishTime(String finishTime) {
         this.finishTime = finishTime;
+    }
+
+    public String getOwnerId() {
+        return OwnerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        OwnerId = ownerId;
     }
 }

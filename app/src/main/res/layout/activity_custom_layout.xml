@@ -10,6 +10,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="5dp"
+        android:src="@drawable/fuelstation"
         android:background="@color/white"
         android:elevation="5dp" />
 

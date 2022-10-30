@@ -28,10 +28,10 @@ import retrofit2.Response;
 
 public class QueueDetails extends AppCompatActivity {
     ImageView backBtn;
+    TextView total_vehicleAmount,departure_time;
+    String Station_Id,Station_Name,queue_Availability;
     Button join_Queue,queue_vehicle_type;
     TextView branch_name,availability;
-    TextView total_vehicleAmount,vehicle_name,vehicle_amount,departure_time,fuelType,fuelTypeStatus;
-    String Station_Id,Station_Name,queue_Availability;
     int Total_vehicles = 0;
     ArrayList<String> title = new ArrayList<String>();
     ArrayList<Integer> subTitle = new ArrayList<Integer>();
@@ -47,8 +47,6 @@ public class QueueDetails extends AppCompatActivity {
         branch_name = findViewById(R.id.branchName);
         availability = findViewById(R.id.queueAvailability);
         total_vehicleAmount = findViewById(R.id.totalVehicleAmount);
-//        vehicle_name = findViewById(R.id.vehicleName);
-//        vehicle_amount = findViewById(R.id.vehicleAmount);
         departure_time = findViewById(R.id.departureTime);
         queue_vehicle_type = findViewById(R.id.queueVehicleType);
 
@@ -59,7 +57,29 @@ public class QueueDetails extends AppCompatActivity {
 
         branch_name.setText(Station_Name);
         availability.setText(queue_Availability);
-        total_vehicleAmount.setText(String.valueOf(Total_vehicles));
+
+        IFuelQueueApi fuelQueueApi = APIConfig.getConfig().create(IFuelQueueApi.class);
+        DBHelper dbHelper = new DBHelper(QueueDetails.this);
+        User user = dbHelper.getSingleUser();
+        Call<FuelQueueResponse> call_get_queue  = fuelQueueApi.GetFuelQueueByStationID(Station_Id);
+        call_get_queue.enqueue(new Callback<FuelQueueResponse>() {
+            @Override
+            public void onResponse(Call<FuelQueueResponse> call, Response<FuelQueueResponse> response) {
+                FuelQueueResponse fuelQueueResponse  = response.body();
+
+                total_vehicleAmount.setText(String.valueOf(response.body() != null ? response.body().getNumberOfVehicles() : 0));
+            }
+
+            @Override
+            public void onFailure(Call<FuelQueueResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
+
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,14 +92,10 @@ public class QueueDetails extends AppCompatActivity {
         join_Queue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IFuelQueueApi fuelQueueApi = APIConfig.getConfig().create(IFuelQueueApi.class);
-                DBHelper dbHelper = new DBHelper(QueueDetails.this);
-                User user = dbHelper.getSingleUser();
 
                 QueueCustomer queueCustomer = new QueueCustomer(user.getUserId(), true, "", "", "", "");
 
                 FuelQueueRequest fuelQueueRequest = new FuelQueueRequest(Station_Id, 0, queueCustomer);
-                System.out.println("" + "+6" + fuelQueueRequest.getCustomers().getUserId());
                 Call<FuelQueueResponse> call = fuelQueueApi.AddUserFuelQueue(Station_Id, fuelQueueRequest);
 
                 call.enqueue(new Callback<FuelQueueResponse>() {
@@ -96,13 +112,12 @@ public class QueueDetails extends AppCompatActivity {
                         for (QueueCustomer queueCustomer : fuelQueueResponses.getCustomers()) {
                             title.add(queueCustomer.getVehicleType());
 
-                            System.out.println(fuelQueueResponses);
+
                         }
                         for (String sub : title) {
                             subTitle.add(Collections.frequency(title, sub));
                         }
 
-                        Total_vehicles = fuelQueueResponses.getNumberOfVehicles();
 
 
                     }
@@ -123,7 +138,6 @@ public class QueueDetails extends AppCompatActivity {
                 intent.putStringArrayListExtra("Title",title);
                 intent.putIntegerArrayListExtra("subTitle",subTitle);
                 startActivity(intent);
-                finish();
             }
         });
 
