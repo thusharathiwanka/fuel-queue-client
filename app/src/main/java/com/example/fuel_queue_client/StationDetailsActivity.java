@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,8 @@ public class StationDetailsActivity extends AppCompatActivity {
     Switch Availability;
     Button Update;
     String id,availability;
+    ImageView backBtn;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -55,12 +58,23 @@ public class StationDetailsActivity extends AppCompatActivity {
         finishTime = findViewById(R.id.finishTime);
         Availability = findViewById(R.id.switch_avl);
         Update = findViewById(R.id.update_station);
+        backBtn = findViewById(R.id.back3);
+
 
 
         //create fuel station api object
         IFuelStationApi fuelStationApi = APIConfig.getConfig().create(IFuelStationApi.class);
         //retrieves station by id
         Call<FuelStationResponse> call = fuelStationApi.GetStationByID(id);
+
+        //direct to the home page
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), FuelStationListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         /***
          Asynchronously send the request and notify callback of its response or if an error occurred talking to the server, creating the request, or processing the response

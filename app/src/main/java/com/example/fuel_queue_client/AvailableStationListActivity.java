@@ -2,11 +2,15 @@ package com.example.fuel_queue_client;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fuel_queue_client.api.APIConfig;
@@ -26,7 +30,7 @@ public class AvailableStationListActivity extends AppCompatActivity {
     ListView listView;
     List<String> title = new ArrayList<String>();
     List<String> subTitle = new ArrayList<String>();
-
+    ImageView backBtn;
     String[] list_title;
     String[] list_subtitle;
     Integer[] imageID ={};
@@ -37,12 +41,23 @@ public class AvailableStationListActivity extends AppCompatActivity {
     Call<List<FuelStationResponse>> call = fuelStationApi.GetAllStations();
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_available_sation_list);
 
+        backBtn = findViewById(R.id.backButton);
+
+        //direct to the home page
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CustomerProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
         /***
          Asynchronously send the request and notify callback of its response or if an error occurred talking to the server, creating the request, or processing the response
