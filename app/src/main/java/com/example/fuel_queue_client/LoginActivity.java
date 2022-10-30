@@ -67,7 +67,6 @@ public class LoginActivity extends AppCompatActivity {
                 Call<UserResponse> call = authApi.loginUser(new UserRequest("", username, password, role, ""));
 
                 if(isValidUsername) {
-
                     /***
                      Asynchronously send the request and notify callback of its response or if an error occurred talking to the server, creating the request, or processing the response
                      ***/
