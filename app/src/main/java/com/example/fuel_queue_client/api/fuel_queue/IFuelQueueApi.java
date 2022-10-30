@@ -7,6 +7,7 @@ import com.example.fuel_queue_client.models.fuel_queue.FuelQueueResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -28,6 +29,14 @@ public interface IFuelQueueApi {
     @POST("/api/FuelQueue/join/{id}")
     Call<FuelQueueResponse> AddUserFuelQueue(@Path("id") String FuelStationID, @Body FuelQueueRequest request);
 
+
+    /***
+     * Retrieve a queue object
+     * @param FuelStationID - Id of the fuel station
+     * @return - A Fuel queue
+     */
+    @GET("/api/FuelQueue/fuel-station/{id}")
+    Call<FuelQueueResponse> GetFuelQueueByStationID(@Path("id") String FuelStationID);
 
 
 

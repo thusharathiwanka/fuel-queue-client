@@ -61,7 +61,7 @@ public class AvailableStationListActivity extends AppCompatActivity {
                 //iterate through the response list and identify available stations
                 for (FuelStationResponse fuelStationResponse : stations) {
 
-                    if(fuelStationResponse.getAvailability() != "Available"){
+                    if(Objects.equals(fuelStationResponse.getAvailability(), "Available") ){
 
                     //name of the station as title of the list item
                     title.add(fuelStationResponse.getName());
@@ -75,6 +75,8 @@ public class AvailableStationListActivity extends AppCompatActivity {
                 //conversion of arraylist to string array
                 list_title= title.toArray(new String[0]);
                 list_subtitle = subTitle.toArray(new String[0]);;
+
+
 
 
                 listView = findViewById(R.id.listView_id);

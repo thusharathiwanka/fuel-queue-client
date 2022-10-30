@@ -61,15 +61,14 @@ public class RegisterStationActivity extends AppCompatActivity {
             name = stationNameInput.getText().toString();
             location = locationInput.getText().toString();
             noPumps = noOfPumps.getText().toString();
-
+            DBHelper dbHelper = new DBHelper(RegisterStationActivity.this);
+            User user = dbHelper.getSingleUser();
             //saves all user entered values and existing values inside a FuelStationResponse object
             IFuelStationApi fuelStationApi = APIConfig.getConfig().create(IFuelStationApi.class);
             //make request to save a fuel station object in database
-            Call<FuelStationResponse> call = fuelStationApi.registerStation(new FuelStationRequest( registrationNumber,name,location,noPumps,availability,arrivalTime,finishTime));
+            Call<FuelStationResponse> call = fuelStationApi.registerStation(new FuelStationRequest( registrationNumber,user.getUserId(),name,location,noPumps,availability,arrivalTime,finishTime));
 
-            IFuelQueueApi fuelQueueApi = APIConfig.getConfig().create(IFuelQueueApi.class);
-            DBHelper dbHelper = new DBHelper(RegisterStationActivity.this);
-            User user = dbHelper.getSingleUser();
+
 
 
 
