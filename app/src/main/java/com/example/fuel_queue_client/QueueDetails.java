@@ -124,7 +124,6 @@ public class QueueDetails extends AppCompatActivity {
                 intent.putStringArrayListExtra("Title",title);
                 intent.putIntegerArrayListExtra("subTitle",subTitle);
                 startActivity(intent);
-                finish();
             }
         });
 

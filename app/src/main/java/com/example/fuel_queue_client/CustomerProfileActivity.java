@@ -49,6 +49,7 @@ public class CustomerProfileActivity extends AppCompatActivity {
                 //deletes the locally saved user
                 dbHelper.deleteOne(user.getId());
                 startActivity(intent);
+                finish();
 
             }
         });

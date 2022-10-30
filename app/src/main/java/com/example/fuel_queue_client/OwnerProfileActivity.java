@@ -32,7 +32,6 @@ public class OwnerProfileActivity extends AppCompatActivity {
             public void onClick(android.view.View view) {
                 Intent intent = new Intent(OwnerProfileActivity.this, RegisterStationActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -42,7 +41,6 @@ public class OwnerProfileActivity extends AppCompatActivity {
             public void onClick(android.view.View view) {
                 Intent intent = new Intent(OwnerProfileActivity.this, FuelStationListActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
