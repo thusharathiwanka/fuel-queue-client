@@ -65,6 +65,7 @@ public class CustomerProfileActivity extends AppCompatActivity {
         Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 removeUserDetails();
             }
         });

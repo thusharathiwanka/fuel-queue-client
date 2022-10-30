@@ -1,5 +1,6 @@
 package com.example.fuel_queue_client.api.fuel_station;
 
+import com.example.fuel_queue_client.models.fuel_queue.FuelQueueResponse;
 import com.example.fuel_queue_client.models.fuel_station.FuelStationRequest;
 import com.example.fuel_queue_client.models.fuel_station.FuelStationResponse;
 
@@ -46,5 +47,15 @@ public interface IFuelStationApi {
      */
     @PUT("/api/FuelStation/{id}")
     Call<FuelStationResponse> UpdateStationByID(@Path("id") String stationID ,@Body FuelStationResponse response);
+
+
+    /***
+     *
+     * @param userId - owner id
+     * @return  fuel station list
+     */
+
+    @GET("api/fuel-station/owner/{id}")
+    Call<FuelStationResponse> GetFuelStationByUserID(@Path("id") String userId);
 
 }

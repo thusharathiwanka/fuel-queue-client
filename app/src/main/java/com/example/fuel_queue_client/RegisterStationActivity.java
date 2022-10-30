@@ -12,9 +12,15 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.fuel_queue_client.api.APIConfig;
+import com.example.fuel_queue_client.api.fuel_queue.IFuelQueueApi;
 import com.example.fuel_queue_client.api.fuel_station.IFuelStationApi;
+import com.example.fuel_queue_client.database.DBHelper;
+import com.example.fuel_queue_client.models.fuel_queue.FuelQueueRequest;
+import com.example.fuel_queue_client.models.fuel_queue.FuelQueueResponse;
+import com.example.fuel_queue_client.models.fuel_queue.QueueCustomer;
 import com.example.fuel_queue_client.models.fuel_station.FuelStationRequest;
 import com.example.fuel_queue_client.models.fuel_station.FuelStationResponse;
+import com.example.fuel_queue_client.models.user.User;
 
 import java.util.Objects;
 
@@ -55,11 +61,16 @@ public class RegisterStationActivity extends AppCompatActivity {
             name = stationNameInput.getText().toString();
             location = locationInput.getText().toString();
             noPumps = noOfPumps.getText().toString();
-
+            DBHelper dbHelper = new DBHelper(RegisterStationActivity.this);
+            User user = dbHelper.getSingleUser();
             //saves all user entered values and existing values inside a FuelStationResponse object
             IFuelStationApi fuelStationApi = APIConfig.getConfig().create(IFuelStationApi.class);
             //make request to save a fuel station object in database
-            Call<FuelStationResponse> call = fuelStationApi.registerStation(new FuelStationRequest( registrationNumber,name,location,noPumps,availability,arrivalTime,finishTime));
+            Call<FuelStationResponse> call = fuelStationApi.registerStation(new FuelStationRequest( registrationNumber,user.getUserId(),name,location,noPumps,availability,arrivalTime,finishTime));
+
+
+
+
 
 
             /***
@@ -73,6 +84,34 @@ public class RegisterStationActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                         return;
                     }
+
+                    FuelStationResponse fuelStationResponse = response.body();
+                    IFuelQueueApi fuelQueueApi = APIConfig.getConfig().create(IFuelQueueApi.class);
+                    DBHelper dbHelper = new DBHelper(RegisterStationActivity.this);
+                    User user = dbHelper.getSingleUser();
+                    FuelQueueRequest fuelQueueRequest = new FuelQueueRequest(fuelStationResponse.getId(), 0,null);
+                    Call<FuelQueueResponse> call_Queue = fuelQueueApi.createFuelQueue(fuelQueueRequest);
+
+                    call_Queue.enqueue(new Callback<FuelQueueResponse>() {
+                        @Override
+                        public void onResponse(Call<FuelQueueResponse> call, Response<FuelQueueResponse> response) {
+                            //display a error message if response unsuccessful
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                              Toast.makeText(getApplicationContext(), "Station & Queue Successfully Created", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<FuelQueueResponse> call, Throwable t) {
+//                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                    });
 
                     //directs to fuel station list activity
                     Intent intent = new Intent(RegisterStationActivity.this, FuelStationListActivity.class);

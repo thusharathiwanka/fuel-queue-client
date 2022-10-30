@@ -111,7 +111,6 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                             //displays  success message on successful response
                             Toast.makeText(getApplicationContext(), "Welcome back", Toast.LENGTH_SHORT).show();
-                            finish();
                         }
 
                         //displays toast message,if response of the request is a failure
