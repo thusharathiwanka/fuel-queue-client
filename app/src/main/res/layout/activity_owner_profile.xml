@@ -6,51 +6,63 @@
     android:layout_height="match_parent"
     tools:context=".OwnerProfileActivity">
 
-    <Button
-        android:id="@+id/Create_station_Owner"
-        android:layout_width="198dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="@color/lightBlue"
-        android:text="Create Station"
-        app:layout_constraintBottom_toTopOf="@+id/View_stations_Owner"
-        app:layout_constraintEnd_toEndOf="@+id/textView5"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView5" />
-
-    <Button
-        android:id="@+id/View_stations_Owner"
-        android:layout_width="198dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="224dp"
-        android:backgroundTint="@color/lightBlue"
-        android:text="View Stations"
-        app:layout_constraintBottom_toTopOf="@+id/LogOUT_Owner"
-        app:layout_constraintEnd_toEndOf="@+id/Create_station_Owner"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/Create_station_Owner" />
-
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="198dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="106dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="107dp"
+        android:id="@+id/title_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_marginBottom="30dp"
+        android:fontFamily="@font/heading"
         android:text="Owner Profile"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/Create_station_Owner"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/Registration_numberInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.283" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/Create_station_Owner"
+        android:layout_width="226dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="@color/lightBlue"
+        android:text="Create Station"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_profile" />
+
+    <Button
+        android:id="@+id/profile_delete_owner"
+        android:layout_width="226dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="172dp"
+        android:backgroundTint="@color/lightBlue"
+        android:text="Delete Profile"
+        app:layout_constraintBottom_toTopOf="@+id/LogOUT_Owner"
+        app:layout_constraintEnd_toEndOf="@+id/LogOUT_Owner"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/LogOUT_Owner"
+        app:layout_constraintTop_toBottomOf="@+id/View_stations_Owner"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/View_stations_Owner"
+        android:layout_width="226dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/lightBlue"
+        android:text="View Stations"
+        app:layout_constraintEnd_toEndOf="@+id/Create_station_Owner"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/Create_station_Owner"
+        app:layout_constraintTop_toBottomOf="@+id/Create_station_Owner" />
 
     <Button
         android:id="@+id/LogOUT_Owner"
-        android:layout_width="191dp"
-        android:layout_height="51dp"
+        android:layout_width="226dp"
+        android:layout_height="56dp"
         android:layout_marginBottom="48dp"
         android:backgroundTint="@color/darkBlue"
         android:text="Log Out"
