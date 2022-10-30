@@ -17,8 +17,10 @@ import android.widget.Toast;
 
 import com.example.fuel_queue_client.api.APIConfig;
 import com.example.fuel_queue_client.api.fuel_station.IFuelStationApi;
+import com.example.fuel_queue_client.database.DBHelper;
 import com.example.fuel_queue_client.models.fuel_station.FuelStationRequest;
 import com.example.fuel_queue_client.models.fuel_station.FuelStationResponse;
+import com.example.fuel_queue_client.models.user.User;
 
 import java.util.List;
 import java.util.Objects;
@@ -34,8 +36,8 @@ public class StationDetailsActivity extends AppCompatActivity {
     EditText arrivalTime, finishTime;
     Switch Availability;
     Button Update;
-    String id;
-    Boolean availability;
+    String id,availability;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,15 +93,23 @@ public class StationDetailsActivity extends AppCompatActivity {
         // saves value of the switch
         Availability.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    availability = isChecked;
+                    if(isChecked){
+                        availability = "Available";
+                    }
+                    else{
+                        availability = "Unavailable";
+                    }
             }
         });
 
 
         // update the station object with user entered values
         Update.setOnClickListener(view -> {
+
+            DBHelper dbHelper = new DBHelper(StationDetailsActivity.this);
+            User user = dbHelper.getSingleUser();
             //saves all user entered values and existing values inside a FuelStationResponse object
-            FuelStationResponse  fuelStationResponse = new FuelStationResponse(id,RegNumber.getText().toString(),Station_name.getText().toString(),Location.getText().toString(),NoPumps.getText().toString(),Availability.getText().toString(),arrivalTime.getText().toString(),finishTime.getText().toString());
+            FuelStationResponse  fuelStationResponse = new FuelStationResponse(id,RegNumber.getText().toString(),user.getUserId(),Station_name.getText().toString(),Location.getText().toString(),NoPumps.getText().toString(),availability,arrivalTime.getText().toString(),finishTime.getText().toString());
             //send request to update fuel station details
             Call<FuelStationResponse> call_Update = fuelStationApi.UpdateStationByID(id,fuelStationResponse);
 

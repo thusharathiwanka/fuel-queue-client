@@ -42,7 +42,6 @@ public class ListViewAdapter extends ArrayAdapter<String> {
 
         titleTxt.setText(title[position]);
         subTitleTxt.setText(subtitle[position]);
-
         return rootView;
     }
 }

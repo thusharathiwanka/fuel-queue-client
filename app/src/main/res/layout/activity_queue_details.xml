@@ -124,10 +124,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-
                         android:layout_marginBottom="32dp"
                         android:fontFamily="@font/semibold"
-                        android:text="50"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
@@ -188,7 +186,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/departureTime"
                     android:layout_width="111dp"
                     android:layout_height="wrap_content"
