@@ -189,7 +189,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/departureTime"
                     android:layout_width="111dp"
                     android:layout_height="wrap_content"
